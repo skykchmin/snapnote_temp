@@ -21,5 +21,5 @@ from board import views
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('board/', include('board.urls')),
-    path('upload/', views.upload, name='upload')
+    # path('upload/', views.upload, name='upload')
 ]
