@@ -1,6 +1,7 @@
 from django.shortcuts import render
 from django.core.files.storage import FileSystemStorage
 
+from .forms import FileForm
 # Create your views here.
 
 def board_list(request):
@@ -15,3 +16,12 @@ def upload(request):
         name = fs.save(uploaded_file.name, uploaded_file)
         context['url'] = fs.url(name)
     return render(request, 'upload.html', context)
+
+def file_list(request):
+    return render(request,'file_list.html')
+
+def upload_file(request):
+    form = FileForm()
+    return render(request,'upload_file.html', {
+        'form': form
+    })
