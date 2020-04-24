@@ -1,4 +1,4 @@
-from django.shortcuts import render
+from django.shortcuts import render, redirect
 from django.core.files.storage import FileSystemStorage
 
 from .forms import FileForm
@@ -21,7 +21,13 @@ def file_list(request):
     return render(request,'file_list.html')
 
 def upload_file(request):
-    form = FileForm()
+    if request.method == 'POST':
+        form = FileForm(request.POST, request.FILES)
+        if form.is_valid():
+            form.save()
+            return redirect('file_list')
+    else:
+        form = FileForm()
     return render(request,'upload_file.html', {
         'form': form
     })
