@@ -2,6 +2,7 @@ from django.shortcuts import render, redirect
 from django.core.files.storage import FileSystemStorage
 
 from .forms import FileForm
+from .models import File
 # Create your views here.
 
 def board_list(request):
@@ -18,7 +19,10 @@ def upload(request):
     return render(request, 'upload.html', context)
 
 def file_list(request):
-    return render(request,'file_list.html')
+    files = File.objects.all()
+    return render(request,'file_list.html', {
+        'files': files
+    })
 
 def upload_file(request):
     if request.method == 'POST':

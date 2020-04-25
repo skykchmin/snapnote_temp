@@ -2,4 +2,21 @@
 
 {% block contents %}
     <h2>Files</h2>
+    <table class="table"> 
+        <thead>
+            <tr>
+                <th>Title</th>
+                <th>Download</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for file in files %}
+                <tr>
+                    <td>{{ file.title }} </td>
+                    <td>{{ file.pdf }} </td>
+                </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+
 {% endblock %}
