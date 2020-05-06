@@ -6,7 +6,7 @@
     <p>
         <a href="{% url 'upload_file' %}" class="btn btn-primary">Upload_file</a>
     </p>
-    <table class="table"> 
+    <table class="table mb-0"> 
         <thead>
             <tr>
                 <th>Title</th>
@@ -23,6 +23,7 @@
                             Download PDF
                         </a>
                     </td>
+                    <!-- <td>{{ file.pdf }} </td> -->
                 </tr>
             {% endfor %}
         </tbody>

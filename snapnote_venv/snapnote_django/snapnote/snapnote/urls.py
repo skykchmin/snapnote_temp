@@ -15,11 +15,12 @@ Including another URLconf
 """
 from django.contrib import admin
 from django.urls import path, include
-# from board.views import upload
 from board import views
+# from board.views import upload
 
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('board/', include('board.urls')),
+    path('snuser/', include('snuser.urls'))
     # path('upload/', views.upload, name='upload')
 ]
