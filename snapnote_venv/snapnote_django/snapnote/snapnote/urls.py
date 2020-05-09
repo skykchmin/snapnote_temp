@@ -16,11 +16,13 @@ Including another URLconf
 from django.contrib import admin
 from django.urls import path, include
 from board import views
+from snuser.views import home
 # from board.views import upload
 
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('board/', include('board.urls')),
-    path('snuser/', include('snuser.urls'))
+    path('snuser/', include('snuser.urls')),
+    path('', home),
     # path('upload/', views.upload, name='upload')
 ]
