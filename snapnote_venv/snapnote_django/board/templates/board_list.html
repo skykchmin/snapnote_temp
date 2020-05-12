@@ -1,31 +1,32 @@
-{% extends "base.html" %} 
+{% extends "base.html" %}
 
 {% block contents %}
-<div class="row mt-5">
-    <div class="col-12">
-        <table class="table table-light">
-            <thead class="thead-light">
-                <tr>
-                    <th>#</th>
-                    <th>제목</th>
+    <h2>Files</h2>
 
-                    <th>일시</th>
-                </tr>
-            </thead>
-            <tbody class="text-dark">
+    <p>
+        <a href="{% url 'upload_file' %}" class="btn btn-primary">Upload_file</a>
+    </p>
+    <table class="table mb-0"> 
+        <thead>
+            <tr>
+                <th>Title</th>
+                <th>Download</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for file in files %}
                 <tr>
-                    <th>1</th>
-                    <td>제목 테스트</td>
-
-                    <td>2020-04-02 21:28:00</td>
+                    <td>{{ file.title }} </td>
+                    <td>{{ file.pdf }} </td>
+                    <td>
+                        <a href="{{ file.pdf.url }}" class="btn btn-primary btn-sm" target="_blank">
+                            Download PDF
+                        </a>
+                    </td>
+                   
                 </tr>
-            </tbody>
-        </table>
-    </div>
-</div>
-<div class="row">
-    <div class="col-12">
-        <button class="btn btn-primary">글쓰기</button>
-    </div>
-</div>
+            {% endfor %}
+        </tbody>
+    </table>
+
 {% endblock %}

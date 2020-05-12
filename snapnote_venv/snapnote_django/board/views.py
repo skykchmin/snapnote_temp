@@ -3,10 +3,14 @@ from django.core.files.storage import FileSystemStorage
 
 from .forms import FileForm
 from .models import File
+
 # Create your views here.
 
 def board_list(request):
-    return render(request, 'board_list.html')
+    files = File.objects.all()
+    return render(request,'file_list.html', {
+        'files': files
+    })
 
 def upload(request):
     context = {}
