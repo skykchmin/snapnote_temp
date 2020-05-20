@@ -19,7 +19,9 @@
                     <td>{{ file.title }} </td>
                     <td>{{ file.pdf }} </td>
                     <td>
-                        <a href="{{ file.pdf.url }}" class="btn btn-primary btn-sm" target="_blank">
+                    
+                        <!-- <a href="{{ file.pdf.url }}" class="btn btn-primary btn-sm" target="_blank"> -->
+                        <a onclick="location.href='board/{{file.pdf.url}}'" class="btn btn-primary btn-sm" target="_blank">    
                             Download PDF
                         </a>
                     </td>
