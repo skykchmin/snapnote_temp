@@ -41,6 +41,7 @@ INSTALLED_APPS = [
     'snuser',
     'board',
     'file',
+    'multiupload',
 ]
 
 MIDDLEWARE = [
