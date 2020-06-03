@@ -224,8 +224,9 @@ class UploadView(FormView):
     success_url = '/board/files/'
 
     def form_valid(self, form):
+       
         for each in form.cleaned_data['files']:
-            File.objects.create(pdf=each) 
+            File.objects.create(title=each, pdf=each)  
         return super(UploadView, self).form_valid(form)
 
     # def get_absolute_url(self):
