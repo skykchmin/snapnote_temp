@@ -2,8 +2,12 @@ from django.shortcuts import render, redirect
 from django.core.files.storage import FileSystemStorage
 
 import os
+import glob
+
+import sys
 from .forms import FileForm
 from .models import File, Attachment
+
 
 from django.http import HttpResponse
 from django.views.generic.edit import FormView
@@ -11,6 +15,13 @@ from django.http import JsonResponse
 from django.views import View
 from .forms import UploadForm
 from django.urls import reverse
+from wand.image import Image as wi
+from datetime import datetime
+from time import localtime, strftime
+from PIL import Image
+import img2pdf
+
+sys.path.append(r'C:\Users\tap\Desktop\snapnote_django2\board')
 
 # Create your views here.
 
@@ -109,7 +120,6 @@ def upload_file(request):
                 handle_uploaded_file(x)
             form.save()
             print(os.path.join(os.getcwd(),"media","files","pdfs"))
-            
             return redirect('file_list')
     else:
         form = FileForm()
@@ -224,17 +234,57 @@ class UploadView(FormView):
     success_url = '/board/files/'
 
     def form_valid(self, form):
-       
+        cnt=0
+        cnt2=0
+        
+        
         for each in form.cleaned_data['files']:
-            File.objects.create(title=each, pdf=each)  
+            File.objects.create(pdf=each)
+            files_path = os.path.join(r'C:\VSCODE\django\snapnote_venv\snapnote_django\snapnote\media\files\pdfs', '*')
+            files = sorted(glob.iglob(files_path), key=os.path.getctime, reverse=True) 
+            pdf = wi(filename=files[0], resolution=400)
+            pdfimage = pdf.convert("jpeg")
+            for img in pdfimage.sequence:
+                page = wi(image=img)
+                page.save(filename=datetime.utcnow().strftime("%Y%m%d%H%M%S.%f") + (".jpg"))
+                cnt2+=1
+            target_dir = "C:\\VSCODE\\django\\snapnote_venv\\snapnote_django\\snapnote\\"
+            files_jpg = glob.glob(target_dir + "*.jpg")           
+            cnt+=1    
+            if cnt==2:
+                files_jpg.sort()
+                halfcnt=cnt2//2
+                int(halfcnt)
+                
+                print(halfcnt)
+                print(files_jpg)
+                for i in range(halfcnt):
+                    im1 = Image.open(files_jpg[i])
+                    im2 = Image.open(files_jpg[i + halfcnt])
+                    blended = Image.blend(im1, im2, alpha=0.5)
+                    blended.save(r'C:\VSCODE\django\snapnote_venv\snapnote_django\snapnote\media\files\pdfs\mergeImg\mergeResult' + str(i) + ".jpg")
+                    #cnt3+=1
+                for i in range(cnt2):
+                    if os.path.isfile(files_jpg[i]):
+                        os.remove(files_jpg[i])
+        
+        
+        dirname = r'C:\VSCODE\django\snapnote_venv\snapnote_django\snapnote\media\files\pdfs\mergeImg'
+        merge_files = os.listdir(dirname)
+        mergefilename=datetime.utcnow().strftime("%Y%m%d%H%M%S.%f") + (".pdf")
+        with open(mergefilename,"wb") as f:
+            imgs = []
+            for fname in os.listdir(dirname):
+                if not fname.endswith(".jpg"):
+                    continue
+                path = os.path.join(dirname, fname)
+                if os.path.isdir(path):
+                    continue
+                imgs.append(path)
+            imgs.sort()
+            f.write(img2pdf.convert(imgs))
+        halfcnt=cnt2//2
+        for i in range(halfcnt):
+            if os.path.isfile(merge_files[i]):
+                os.remove(merge_files[i])
         return super(UploadView, self).form_valid(form)
-
-    # def get_absolute_url(self):
-    #     return redirect('file_list')
-
-    # def get_success_url(self):
-    #     return reverse('board/files')    
-
-
-       
-
