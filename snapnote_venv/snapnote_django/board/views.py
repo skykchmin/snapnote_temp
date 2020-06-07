@@ -239,7 +239,7 @@ class UploadView(FormView):
         
         
         for each in form.cleaned_data['files']:
-            File.objects.create(pdf=each)
+            File.objects.create(title=each, pdf=each)
             files_path = os.path.join(r'C:\VSCODE\django\snapnote_venv\snapnote_django\snapnote\media\files\pdfs', '*')
             files = sorted(glob.iglob(files_path), key=os.path.getctime, reverse=True) 
             pdf = wi(filename=files[0], resolution=400)

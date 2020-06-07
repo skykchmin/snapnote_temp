@@ -1,38 +1,245 @@
 {% extends "base.html" %}
+{% load static %}
 
 {% block contents %}
-<div class="row mt-5">
-    <div class="col-12 text-center">
-        <h1>Snapnote</h1>
-    </div>
-</div>
-<div class="row mt-5">
-    {% if request.session.user %} 
-    <div class="col-12">
-        <button class="btn btn-primary btn-block" onclick="location.href='/snuser/logout/'">로그아웃</button>
-    </div>
-    {% else %}
-    <div class="col-6">
-        <button class="btn btn-primary btn-block" onclick="location.href='/snuser/login/'">로그인</button>
-    </div>
-    <div class="col-6">
-        <button class="btn btn-primary btn-block" onclick="location.href='/snuser/register/'">회원가입</button>
-    </div>
 
-    {% endif %}
-</div>
+<head>
 
-<div class="row mt-1">
-    <div class="col-12">
-        <button class="btn btn-primary btn-block" onclick="location.href='/board/form/'">파일업로드</button>
-    </div>
-</div>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta name="description" content="">
+    <meta name="author" content="">
 
-<div class="row mt-1">
-    <div class="col-12">
-        <button class="btn btn-primary btn-block" onclick="location.href='/board/files/'">게시물보기</button>
-    </div>
-</div>
+    <title>Landing Page - Start Bootstrap Theme</title>
+
+    <!-- Bootstrap core CSS -->
+    <link href='{% static "vendor/bootstrap/css/bootstrap.min.css" %}' rel="stylesheet">
+    <!-- <link href="vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet"> -->
+
+    <!-- Custom fonts for this template -->
+    <link href='{% static "vendor/fontawesome-free/css/all.min.css" %}' rel="stylesheet">
+    <link href='{% static "vendor/simple-line-icons/css/simple-line-icons.css" %}' rel="stylesheet" type="text/css">
+    <link href="https://fonts.googleapis.com/css?family=Lato:300,400,700,300italic,400italic,700italic" rel="stylesheet"
+        type="text/css">
+
+    <!-- Custom styles for this template -->
+    <link href='{% static "css/landing-page.min.css"%}' rel="stylesheet">
+
+</head>
+
+<body>
+
+    <!-- Navigation -->
+    <nav class="navbar navbar-light bg-light static-top">
+        <div class="container">
+            <a class="navbar-brand" href="#">SnapNote</a>
+
+        </div>
+    </nav>
+
+    <!-- Masthead -->
+    <header class="masthead text-white text-center">
+        <div class="overlay"></div>
+        <div class="container">
+            <div class="row">
+                <div class="col-xl-9 mx-auto">
+                    <h1 class="mb-5">필기를 편하게 합쳐보세요!</h1>
+                </div>
+
+                {% if request.session.user %}
+                <div class="col-12">
+                    <button class="btn btn-primary btn-block" onclick="location.href='/snuser/logout/'">로그아웃</button>
+                </div>
+                {% else %}
+                <div class="col-6">
+                    <button class="btn btn-primary btn-block" onclick="location.href='/snuser/login/'">로그인</button>
+                </div>
+                <div class="col-6">
+                    <button class="btn btn-primary btn-block" onclick="location.href='/snuser/register/'">회원가입</button>
+                </div>
+
+                {% endif %}
+            </div>
+            <div class="row mt-1">
+                <div class="col-12">
+                    <button class="btn btn-primary btn-block" onclick="location.href='/board/form/'">파일업로드</button>
+                </div>
+            </div>
+
+            <div class="row mt-1">
+                <div class="col-12">
+                    <button class="btn btn-primary btn-block" onclick="location.href='/board/files/'">게시물보기</button>
+                </div>
+            </div>
+
+    </header>
+
+    <!-- Icons Grid -->
+    <section class="features-icons bg-light text-center">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-4">
+                    <div class="features-icons-item mx-auto mb-5 mb-lg-0 mb-lg-3">
+                        <div class="features-icons-icon d-flex">
+                            <i class="icon-screen-desktop m-auto text-primary"></i>
+                        </div>
+                        <h4>모든 화면에 적용됩니다!</h4>
+                        <p class="lead mb-0">어떤 크기, 어떤 사이즈와 상관없이 이 웹은 어디서든 동작합니다!</p>
+                    </div>
+                </div>
+                <div class="col-lg-4">
+                    <div class="features-icons-item mx-auto mb-5 mb-lg-0 mb-lg-3">
+                        <div class="features-icons-icon d-flex">
+                            <i class="icon-layers m-auto text-primary"></i>
+                        </div>
+                        <h4>원하는 파일을 합쳐보세요!</h4>
+                        <p class="lead mb-0">원하는 파일의 필기를 합치고, 공유하세요!</p>
+                    </div>
+                </div>
+                <div class="col-lg-4">
+                    <div class="features-icons-item mx-auto mb-0 mb-lg-3">
+                        <div class="features-icons-icon d-flex">
+                            <i class="icon-check m-auto text-primary"></i>
+                        </div>
+                        <h4>사용하기 쉽습니다!</h4>
+                        <p class="lead mb-0">직관적인 기능과 화면으로 파일을 쉽게 이용하세요!</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Image Showcases -->
+    <section class="showcase">
+        <div class="container-fluid p-0">
+            <div class="row no-gutters">
+
+                <div class="col-lg-6 order-lg-2 text-white showcase-img"
+                    style="background-image: url('{% static "img/bg-showcase-1.jpg" %}');"></div>
+                <div class="col-lg-6 order-lg-1 my-auto showcase-text">
+                    <h2>모든 파일 적용!</h2>
+                    <p class="lead mb-0">이 웹 사이트를 사용하면 웹 사이트가 휴대 전화, 태블릿 또는 데스크톱에 관계없이 모든 기기에서 멋지게 보일 것입니다!</p>
+                </div>
+            </div>
+            <div class="row no-gutters">
+                <div class="col-lg-6 text-white showcase-img" style="background-image: url('{% static "img/bg-showcase-2.jpg" %}');">
+                </div>
+                <div class="col-lg-6 my-auto showcase-text">
+                    <h2>PDF 파일 결합</h2>
+                    <p class="lead mb-0">다른 사람과의 PDF의 필기를 서로 결합하고, 공유해보세요!</p>
+                </div>
+            </div>
+            <div class="row no-gutters">
+                <div class="col-lg-6 order-lg-2 text-white showcase-img"
+                    style="background-image: url('{% static "img/bg-showcase-3.jpg" %}');"></div>
+                <div class="col-lg-6 order-lg-1 my-auto showcase-text">
+                    <h2>사용하기 쉬운 기능</h2>
+                    <p class="lead mb-0">직관적이고 사용하기 쉽게 설계했습니다! 지금 사용해보세요! </p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Testimonials -->
+    <section class="testimonials text-center bg-light">
+        <div class="container">
+            <h2 class="mb-5">캡스톤 하면서 느낀 점</h2>
+            <div class="row">
+                <div class="col-lg-3">
+                    <div class="testimonial-item mx-auto mb-5 mb-lg-0">
+                        <img class="img-fluid rounded-circle mb-3" src='{% static "img/min.jpg" %}' alt="">
+                        <h5>민경천</h5>
+                        <p class="font-weight-light mb-0">"프론트엔드와 백엔드를 둘다 작업해보면서 적용이 어려운 부분도 있었으나 기능을 구현하면서 점차 발전하는 제 모습을 발견한 것 같습니다! 앞으로 많은 부분을 노력해야겠다는 점도 느꼈습니다!"</p>
+                    </div>
+                </div>
+                <div class="col-lg-3">
+                    <div class="testimonial-item mx-auto mb-5 mb-lg-0">
+                        <img class="img-fluid rounded-circle mb-3" src='{% static "img/jung.jpg" %}' alt="">
+                        <h5>정연우</h5>
+                        <p class="font-weight-light mb-0">"모바일 앱을 개발하는것과는
+                            또 다른 새로운 즐거움이 있었다"</p>
+                    </div>
+                </div>
+                <div class="col-lg-3">
+                    <div class="testimonial-item mx-auto mb-5 mb-lg-0">
+                        <img class="img-fluid rounded-circle mb-3" src='{% static "img/bae.jpg" %}' alt="">
+                        <h5>배상우</h5>
+                        <p class="font-weight-light mb-0">"힘들고 좋은 경험,,"</p>
+                    </div>
+                </div>
+                <div class="col-lg-3">
+                    <div class="testimonial-item mx-auto mb-5 mb-lg-0">
+                        <img class="img-fluid rounded-circle mb-3" src='{% static "img/kim.jpg" %}' alt="">
+                        <h5>김민석</h5>
+                        <p class="font-weight-light mb-0">"Boys, be ambitious!"</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+
+    <!-- Footer -->
+    <footer class="footer bg-light">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-6 h-100 text-center text-lg-left my-auto">
+                    <ul class="list-inline mb-2">
+                        <li class="list-inline-item">
+                            <a href="#">About</a>
+                        </li>
+                        <li class="list-inline-item">&sdot;</li>
+                        <li class="list-inline-item">
+                            <a href="https://www.instagram.com/cheony_y/" target="_self">Contact</a>
+                        </li>
+                        <li class="list-inline-item">&sdot;</li>
+                        <li class="list-inline-item">
+                            <a href="#">Terms of Use</a>
+                        </li>
+                        <li class="list-inline-item">&sdot;</li>
+                        <li class="list-inline-item">
+                            <a href="#">Privacy Policy</a>
+                        </li>
+                    </ul>
+                    <p class="text-muted small mb-4 mb-lg-0">&copy; Your Website 2020. All Rights Reserved.</p>
+                </div>
+                <div class="col-lg-6 h-100 text-center text-lg-right my-auto">
+                    <ul class="list-inline mb-0">
+                        <li class="list-inline-item">
+                            <a href="https://github.com/skykchmin" target="_self">
+                                <i class="fab fa-github fa-2x fa-fw"></i>
+                            </a>
+                        </li>
+                        <li class="list-inline-item">
+                            <a href="https://www.instagram.com/cheony_y/" target="_self">
+                                <i class="fab fa-instagram fa-2x fa-fw"></i>
+                            </a>
+                        </li>
+                        <!-- <li class="list-inline-item mr-3">
+                            <a href="#">
+                                <i class="fab fa-facebook fa-2x fa-fw"></i>
+                            </a>
+                        </li>
+                        <li class="list-inline-item mr-3">
+                            <a href="#">
+                                <i class="fab fa-twitter-square fa-2x fa-fw"></i>
+                            </a>
+                        </li> -->
+                        
+                     </ul>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Bootstrap core JavaScript -->
+    <script src='{% static "vendor/jquery/jquery.min.js" %}'></script>
+    <script src='{% static "vendor/bootstrap/js/bootstrap.bundle.min.js" %}'></script>
+
+</body>
+
+</html>
+
 
 
 {% endblock %}
